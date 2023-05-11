@@ -10,7 +10,7 @@ jobs:
   benchmark:
     name: Benchmark `ReadDir` vs `Readdir`
     runs-on: ubuntu-latest
+    container: golang:latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-go@v4
       - run: go test -bench=.
