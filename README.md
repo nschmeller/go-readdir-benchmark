@@ -42,4 +42,21 @@ PASS
 ok      github.com/nschmeller/go-readdir-benchmark      2.477s
 ```
 
+`ReadDir` is 2.5x faster than `Readdir` here!
+
 This result run can also be viewed in the GitHub Actions for this repo.
+From an example run:
+
+```console
+Run go test -bench=.
+goos: linux
+goarch: amd64
+pkg: github.com/nschmeller/go-readdir-benchmark
+cpu: Intel(R) Xeon(R) Platinum 8272CL CPU @ 2.60GHz
+BenchmarkReaddir-2   	    8221	    148709 ns/op
+BenchmarkReadDir-2   	   46755	     23487 ns/op
+PASS
+ok  	github.com/nschmeller/go-readdir-benchmark	3.179s
+```
+
+In this case, `ReadDir` is 6.3x faster than `Readdir`! 🔥
