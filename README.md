@@ -1,15 +1,22 @@
 # Go `Readdir` vs `ReadDir` Micro Benchmark
 
-## Raison d'Être
+## Repository Raison d'Être
 
-Go 1.16 introduced a new API function in the `os` package called `ReadDir`.
-`ReadDir` has the same functionality as the previously-existing `Readdir`,
-(both return a slice of the contents of a given directory). The authors
-claim that `ReadDir` is _much_ faster than `Readdir` as `ReadDir` does not
-stat each file in the directory.
+Go 1.16 [introduced](https://go.dev/doc/go1.16#:~:text=The%20package%20defines,File.ReadDir.)
+a new API function in the `os` package called [`ReadDir`](https://pkg.go.dev/os#File.ReadDir).
+`ReadDir` has the same functionality as the previously-existing
+[`Readdir`](https://pkg.go.dev/os#File.Readdir), (both return a slice of
+the contents of a given directory). The intent is that `ReadDir` is _much_
+faster than `Readdir`, as `ReadDir` does not stat each file in the directory.
 
-In order to test these claims (and see just how cool this new feature is),
-this repo contains two Go benchmark tests, one for `ReadDir` and one for `Readdir`.
+In order to test these claims (and measure the coolness of this new feature),
+this repo contains two Go benchmark tests: one for `ReadDir` and one for `Readdir`.
+
+The benchmarked loop for each test consists of:
+
+* Call to `os.Open("/proc")` to get a file handle to read ( + error check)
+  * I chose to read `/proc` because it was part of the inspiration for this repo
+* Call to the "readdir" function under test ( + error check)
 
 ## How to Run the Benchmarks
 

@@ -13,7 +13,10 @@ func BenchmarkReaddir(b *testing.B) {
 			b.Error(err)
 		}
 
-		f.Readdir(0)
+		_, err = f.Readdir(0)
+		if err != nil {
+			b.Error(err)
+		}
 	}
 }
 
@@ -25,6 +28,9 @@ func BenchmarkReadDir(b *testing.B) {
 			b.Error(err)
 		}
 
-		f.ReadDir(0)
+		_, err = f.ReadDir(0)
+		if err != nil {
+			b.Error(err)
+		}
 	}
 }
